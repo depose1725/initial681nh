@@ -1,0 +1,32 @@
+import random
+
+# Constants
+NUM_SIMULATIONS = 100000  # Number of simulations to run
+
+# Simulate a poker hand
+def simulate_poker_hand():
+    # Initialize the deck
+    deck = [i for i in range(52)]
+
+    # Shuffle the deck
+    random.shuffle(deck)
+
+    # Deal cards to each player
+    player_cards = [[] for _ in range(5)]
+    for _ in range(2):
+        for i in range(5):
+            player_cards[i].append(deck.pop())
+
+    # Simulate the community cards
+    community_cards = []
+    for _ in range(5):
+        community_cards.append(deck.pop())
+
+    # Calculate winning probabilities for each player
+    winning_probabilities = []
+    for i in range(5):
+        hand = player_cards[i] + community_cards
+        winning_probability = calculate_winning_probability(hand)
+        winning_probabilities.append(winning_probability)
+
+    return winning_probabilities
